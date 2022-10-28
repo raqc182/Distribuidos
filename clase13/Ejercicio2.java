@@ -1,10 +1,11 @@
 import java.util.*;
+import java.util.stream.Collectors;
 import java.io.*;
 
-class Ejercicio1 {
+class Ejercicio2 {
     public static void main(String[] args) throws FileNotFoundException {
         Map<Character, Integer> hm = new HashMap<Character, Integer>(); // Hashmap donde guardaremos los caracteres y su conteo
- 
+
         // Definimos los objetos para abrir y leer archivo
         File file = new File("El_viejo_y_el_mar.txt");
         BufferedReader br = new BufferedReader(new FileReader(file));
@@ -25,8 +26,23 @@ class Ejercicio1 {
         }catch(IOException e){
             e.printStackTrace();
         }
+        
+        LinkedHashMap<Character, Integer> sortedMap = new LinkedHashMap<>();
+        ArrayList<Integer> list = new ArrayList<>();
 
-        for(Map.Entry<Character, Integer> me: hm.entrySet()){ // Imprimimos cada llave (caracter) y valor (apariciones) del HashMap
+        for (Map.Entry<Character, Integer> me: hm.entrySet()){  // Guardamos los valores de las keys en una lista
+            list.add(me.getValue());
+        }
+
+        Collections.sort(list); // Ordenamos la lista
+        for(int num : list){    // Referenciamos cada valor con su respectiva llave
+            for(Map.Entry<Character, Integer> me : hm.entrySet()){
+                if(me.getValue().equals(num)){
+                    sortedMap.put(me.getKey(), num);
+                }
+            }
+        }
+        for(Map.Entry<Character, Integer> me: sortedMap.entrySet()){ // Imprimimos cada llave (caracter) y valor (apariciones) del HashMap
             System.out.println(me.getKey() + ":" + me.getValue());
         }
     }
