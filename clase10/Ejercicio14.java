@@ -30,9 +30,11 @@ public class Ejercicio14 {
             if(crp.compareTo(aux) < 0){ /*.substring(0, 3).compareTo(aux)*/
                 listaOrdenada.set(count, crp);
                 count++;
+
             }else if(crp.compareTo(aux) > 0) {
                 listaOrdenada.set(count, aux);
                 count++;
+                
             }else{
                 listaOrdenada.add(crp);
             }
